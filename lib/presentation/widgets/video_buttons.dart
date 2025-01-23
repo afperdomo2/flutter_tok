@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tok/config/helpers/human_formatter.dart';
 import 'package:flutter_tok/domain/entities/video_post.dart';
@@ -14,7 +15,16 @@ class VideoButton extends StatelessWidget {
         // Like button
         _CustomButton(
             value: video.likes, icon: Icons.favorite, iconColor: Colors.red),
-        _CustomButton(value: video.views, icon: Icons.remove_red_eye_outlined)
+        const SizedBox(height: 15),
+        _CustomButton(value: video.views, icon: Icons.remove_red_eye_outlined),
+        const SizedBox(height: 15),
+        SpinPerfect(
+            infinite: true,
+            duration: const Duration(seconds: 5),
+            child: _CustomButton(
+                value: 0,
+                icon: Icons.play_circle_outline,
+                iconColor: Colors.teal[300])),
         // Comment button
         // Share button
       ],
@@ -37,7 +47,9 @@ class _CustomButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(onPressed: () {}, icon: iconStyle),
-        Text(formattedValue, style: const TextStyle(color: Colors.white)),
+        value > 0
+            ? Text(formattedValue, style: const TextStyle(color: Colors.white))
+            : const SizedBox(),
       ],
     );
   }
