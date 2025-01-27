@@ -13,18 +13,14 @@ class VideoButton extends StatelessWidget {
     return Column(
       children: [
         // Like button
-        _CustomButton(
-            value: video.likes, icon: Icons.favorite, iconColor: Colors.red),
+        _CustomButton(value: video.likes, icon: Icons.favorite, iconColor: Colors.red),
         const SizedBox(height: 15),
         _CustomButton(value: video.views, icon: Icons.remove_red_eye_outlined),
         const SizedBox(height: 15),
         SpinPerfect(
             infinite: true,
             duration: const Duration(seconds: 5),
-            child: _CustomButton(
-                value: 0,
-                icon: Icons.play_circle_outline,
-                iconColor: Colors.teal[300])),
+            child: _CustomButton(value: 0, icon: Icons.play_circle_outline, iconColor: Colors.teal[300])),
         // Comment button
         // Share button
       ],
@@ -37,8 +33,7 @@ class _CustomButton extends StatelessWidget {
   final IconData icon;
   final Color? color;
 
-  const _CustomButton({required this.value, required this.icon, iconColor})
-      : color = iconColor ?? Colors.white;
+  const _CustomButton({required this.value, required this.icon, iconColor}) : color = iconColor ?? Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +42,7 @@ class _CustomButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(onPressed: () {}, icon: iconStyle),
-        value > 0
-            ? Text(formattedValue, style: const TextStyle(color: Colors.white))
-            : const SizedBox(),
+        value > 0 ? Text(formattedValue, style: const TextStyle(color: Colors.white)) : const SizedBox(),
       ],
     );
   }

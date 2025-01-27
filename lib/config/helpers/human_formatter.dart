@@ -2,20 +2,17 @@ import 'package:intl/intl.dart';
 
 class HumanFormatter {
   static String formatLargeNumber(double value) {
-    return NumberFormat.compactCurrency(decimalDigits: 1, symbol: '')
-        .format(value);
+    return NumberFormat.compactCurrency(decimalDigits: 1, symbol: '').format(value);
   }
 
   /// Convierte un número en un formato de moneda (opcionalmente puedes configurar el símbolo y los decimales)
-  static String formatCurrency(num value,
-      {String locale = 'en_US', String symbol = '\$'}) {
+  static String formatCurrency(num value, {String locale = 'en_US', String symbol = '\$'}) {
     final format = NumberFormat.currency(locale: locale, symbol: symbol);
     return format.format(value);
   }
 
   /// Formatea una fecha en un formato amigable para humanos
-  static String formatDate(DateTime date,
-      {String pattern = 'MMM dd, yyyy', String? locale}) {
+  static String formatDate(DateTime date, {String pattern = 'MMM dd, yyyy', String? locale}) {
     final format = DateFormat(pattern, locale);
     return format.format(date);
   }
