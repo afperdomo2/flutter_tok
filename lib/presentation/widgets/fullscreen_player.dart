@@ -5,8 +5,7 @@ class FullscreenPlayer extends StatefulWidget {
   final String title;
   final String videoUrl;
 
-  const FullscreenPlayer(
-      {super.key, required this.title, required this.videoUrl});
+  const FullscreenPlayer({super.key, required this.title, required this.videoUrl});
 
   @override
   State<FullscreenPlayer> createState() => _FullscreenPlayerState();
@@ -36,9 +35,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
         future: controller.initialize(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-                child: CircularProgressIndicator(
-                    strokeWidth: 2, color: Colors.green));
+            return const Center(child: CircularProgressIndicator(strokeWidth: 2, color: Colors.green));
           }
           return GestureDetector(
               onTap: toggleVideoPlayback,
@@ -49,6 +46,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                     VideoPlayer(controller),
 
                     // Gradient
+                    const _VideoBackground(),
 
                     // Title
                     _VideoTitle(title: widget.title),
@@ -73,9 +71,28 @@ class _VideoTitle extends StatelessWidget {
     return Positioned(
       bottom: 50,
       left: 20,
-      child: SizedBox(
-          width: size.width * 0.6,
-          child: Text(title, maxLines: 2, style: titleStyle)),
+      child: SizedBox(width: size.width * 0.6, child: Text(title, maxLines: 2, style: titleStyle)),
     );
+  }
+}
+
+class _VideoBackground extends StatelessWidget {
+  const _VideoBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    var gradientColors = [Colors.transparent, Colors.black87];
+
+    return Positioned.fill(
+        child: DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradientColors,
+          stops: const [0.8, 1.0],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+    ));
   }
 }
